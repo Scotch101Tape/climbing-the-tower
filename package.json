@@ -1,0 +1,24 @@
+{
+  "name": "climbing-the-tower-local",
+  "version": "1.0.0",
+  "description": "A game where you climb a tower. This is the prototype for the multiplayer scotch101tape/climbing-the-tower.",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Scotch101Tape/climbing-the-tower-local.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Scotch101Tape/climbing-the-tower-local/issues"
+  },
+  "homepage": "https://github.com/Scotch101Tape/climbing-the-tower-local#readme"
+}
