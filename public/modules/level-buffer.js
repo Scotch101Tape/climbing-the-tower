@@ -14,9 +14,15 @@ LevelBuffer.getLevel = function(number) {
         return LevelBuffer.LevelBuffer[number]
     } else {
         // Return a promise that get the level from the server
-        return (new Promise((res, rej) => {
+        return new Promise((res, rej) => {
+            fetch(`https://climbing-the-tower-local.scotch101tape.repl.co/levels/${number}.json`)
+            .then(response => response.json())
+            .then(data => res(data))
+        })
+        
+        /*(new Promise((res, rej) => {
             const Http = new XMLHttpRequest()
-            const url=`https://climbing-the-tower-local.scotch101tape.repl.co/levels/${number}.json`
+            const url=`https://cors-anywhere.herokuapp.com/https://climbing-the-tower-local.scotch101tape.repl.co/levels/${number}.json`
             Http.open("GET", url)
             Http.addEventListener("load", function() {
                 if (this.status == 200) {
@@ -27,7 +33,7 @@ LevelBuffer.getLevel = function(number) {
             })
 
             Http.send()
-        }))
+        }))*/
     }
 }
 

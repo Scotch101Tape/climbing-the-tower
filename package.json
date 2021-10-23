@@ -4,6 +4,7 @@
   "description": "A game where you climb a tower. This is the prototype for the multiplayer scotch101tape/climbing-the-tower.",
   "main": "index.js",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "p5": "^1.4.0"
   },

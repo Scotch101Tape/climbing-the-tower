@@ -1,0 +1,27 @@
+{
+    "entities": [
+        {
+            "type": "spawn",
+            "position": [0, 2]
+        },
+        {
+            "type": "finish",
+            "position": [2, 2]
+        }
+    ],
+    "grid": {
+        "0": {
+            "0": true,
+            "1": true,
+            "2": true
+        },
+        "1": {
+            "2": true
+        },
+        "2": {
+            "0": true,
+            "1": true,
+            "2": true
+        }
+    }
+}

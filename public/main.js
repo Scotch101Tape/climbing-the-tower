@@ -15,6 +15,7 @@ window.preload = function() {
 }
 
 window.setup = function() {
+    textSize(20)
     noStroke()
     frameRate(FRAME_RATE)
     rectMode(CENTER)
@@ -28,6 +29,10 @@ window.setup = function() {
 window.draw = function() {
     // Apply background
     background(...BACKGROUND)
+
+    // Directions
+    fill(255, 255, 255)
+    text("Press W to move in toward the mouse\nPress left shift to dash", 10, 15)
 
     // Apply the camera
     if (Camera.initalized) {
