@@ -66,9 +66,32 @@ Spike.prototype.draw = function() {
     rect(this.position.x, this.position.y, 0.75, 0.75)
 }
 
+Spike.prototype.checkKill = function(player) {
+    if (this.spikey()) {
+        return player.isOnRectangle(this.position.x, this.position.y, 0.75, 0.75)
+    }
+}
+
+/* Lava */
+export let Lava = function(data) {
+    Entity.call(this, data)
+}
+
+Lava.prototype = Object.create(Entity.prototype)
+
+Lava.prototype.draw = function() {
+    fill(255, 0, 0)
+    rect(this.position.x, this.position.y, 0.75, 0.75)
+}
+
+Lava.prototype.checkKill = function(player) {
+    return player.isOnRectangle(this.position.x, this.position.y, 0.75, 0.75)
+}
+
 /* Entities */
 export let Entities = {
     "spawn": Spawn,
     "finish": Finish,
-    "spike": Spike
+    "spike": Spike,
+    "lava": Lava
 }

@@ -17,7 +17,7 @@ Grid.prototype.foreachCell = function(f) {
     for (const x in this.data) {
         for (const y in this.data[x]) {
             // If there is a result, return it and break the loop
-            const result = f(x, y)
+            const result = f(Number(x), Number(y))
             if (result != undefined) {
                 return result
             }
@@ -58,17 +58,14 @@ Grid.nextLine = function(origin, direction) {
 
 }
 
-Grid.prototype.playerIsOn = function (player) {
-    //TODO fix this
-    const px = player.position.x
-    const py = player.position.y
+Grid.prototype.positionIsOn = function (position) {
+    const px = position.x
+    const py = position.y
     if(this.foreachCell((x, y) => {
-        const isIn = px >= x
-            && py >= y
-            && px <= x + 1
-            && py <= y + 1
-
-        if (isIn) {
+        if (px >= x - 0.5
+            && py >= y - 0.5
+            && px <= x + 0.5
+            && py <= y + 0.5) {
             return true
         }
     }) != undefined) {

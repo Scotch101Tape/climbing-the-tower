@@ -6,13 +6,22 @@ import {LevelBuffer} from "./modules/level-buffer.js"
 import {Map} from "./modules/map.js"
 import {Player} from "./modules/player.js"
 import {CANVAS_SIZE, BACKGROUND, FRAME_RATE} from "./modules/config.js"
+import {Effects} from "./modules/effects.js"
 
 /* p5.js */
+window.preload = function() {
+    //Init effects
+    Effects.init()
+}
+
 window.setup = function() {
     noStroke()
     frameRate(FRAME_RATE)
     rectMode(CENTER)
     createCanvas(...CANVAS_SIZE.asArray())
+
+    // Init the map, 
+    // this inits map, camera, and player
     Map.init(LevelBuffer.nextLevel())
 }
 
@@ -25,22 +34,31 @@ window.draw = function() {
         Camera.applyMatrix()
     }
 
+    // Do map housekeeping
     if (Map.initalized) {
-        Map.draw()
         Map.step(deltaTime)
+        Map.draw()
         if (Map.checkKill(Player)) {
-            // TODO do the dying thing
-            console.log("PLAYER HAS DIED")
+            Effects.death()
+            Map.reset()
+        } else if (Map.checkPlayerFall(Player)) {
+            Effects.death()
+            Map.reset()
+        } else if (Map.checkFinish(Player)) {
+            Effects.nextLevel()
+            Map.init(LevelBuffer.nextLevel())
         }
     }
 
+    // Do player housekeeping
     if (Player.initalized) {
+        Player.step(deltaTime)
+        Player.move()
         Player.draw()
-        Player.move(Map)
     }
 }
 
+// Do scaling with the mouse wheel
 window.mouseWheel = function(event) {
     Camera.mouseWheel(event)
-    console.log(Camera.scale)
 }

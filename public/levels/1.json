@@ -5,10 +5,8 @@
             "position": [0, 0]
         },
         {
-            "type": "spike",
-            "position": [0, 1],
-            "interval": 1000,
-            "startTime": 0
+            "type": "lava",
+            "position": [0, 1]
         },
         {
             "type": "finish",

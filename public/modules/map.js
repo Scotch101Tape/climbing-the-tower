@@ -1,11 +1,11 @@
 import {Vector} from "./vector.js"
 import {Grid} from "./grid.js"
-import {Entities, Spawn} from "./entities.js"
+import {Entities, Spawn, Finish} from "./entities.js"
 import {Player} from "./player.js" 
+import {Camera} from "./camera.js"
 
 /* Map */
 export let Map = {
-    center: Vector.nullVector(),
     initalized: false
     //level, grid, entities
 }
@@ -27,6 +27,9 @@ Map.init = async function(level) {
         switch (type) {
             case Spawn: {
                 Player.init(entity.position)
+            }
+            case Finish: {
+                Map.finishPosition = entity.position
             }
         }
     }
@@ -56,4 +59,22 @@ Map.checkKill = function(player) {
             return true
         }
     }
+
+    return false
+}
+
+Map.checkPlayerFall = function(player) {
+    return !Map.grid.positionIsOn(player.position)
+}
+
+Map.reset = function() {
+    Map.initalized = false
+    Camera.initalized = false
+    Player.initalized = false
+
+    Map.init(Map.level)
+}
+
+Map.checkFinish = function(player) {
+    return player.isOnRectangle(Map.finishPosition.x, Map.finishPosition.y, 0.1, 0.1)
 }
