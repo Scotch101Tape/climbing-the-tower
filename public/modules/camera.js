@@ -19,7 +19,7 @@ Camera.applyMatrix = function() {
 }
 
 Camera.mouseWheel = function(event) {
-    Camera.scale = Math.max(Math.min(event.delta * 0.1 + Camera.scale, 100), 10)
+    Camera.scale = Math.max(Math.min(Camera.scale - event.delta * 0.1 , 100), 10)
 }
 
 Camera.playerPositionChanged = function(position) {

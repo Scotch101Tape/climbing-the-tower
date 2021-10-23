@@ -1,7 +1,7 @@
 /* LevelBuffer */
 // Manage getting the levels from the server
 export let LevelBuffer = {
-    current: 1,
+    current: 0,
     buffered: 0,
     buffer: 3,
     levels: {}
