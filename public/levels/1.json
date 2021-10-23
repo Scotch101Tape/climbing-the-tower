@@ -6,16 +6,16 @@
         },
         {
             "type": "spike",
-            "position": [1, 0],
-            "interval": 1,
+            "position": [0, 1],
+            "interval": 1000,
             "startTime": 0
         },
         {
             "type": "finish",
-            "position": [2, 0]
+            "position": [0, 2]
         }
     ],
-    "map": {
+    "grid": {
         "0": {
             "0": true,
             "1": true,
