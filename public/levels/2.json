@@ -1,0 +1,32 @@
+{
+    "entities": [
+        {
+            "type": "spawn",
+            "position": [0, 0]
+        },
+        {
+            "type": "spike",
+            "position": [0, 1],
+            "interval": 1000,
+            "startTime": 500
+        },
+        {
+            "type": "spike",
+            "position": [0, 2],
+            "interval": 1000,
+            "startTime": 0
+        },
+        {
+            "type": "finish",
+            "position": [0, 3]
+        }
+    ],
+    "grid": {
+        "0": {
+            "0": true,
+            "1": true,
+            "2": true,
+            "3": true
+        }
+    } 
+}
