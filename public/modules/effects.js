@@ -1,4 +1,8 @@
 import {CANVAS_SIZE} from "./config.js"
+import {Animation} from "./animation.js"
+import {Player} from "./player.js"
+import {Camera} from "./camera.js"
+import {Vector} from "./vector.js"
 
 export let Effects = {}
 
@@ -21,7 +25,16 @@ Effects.death = function() {
     noLoop()
 }
 
-Effects.dash = function() {
+Effects.dash = function(start, end) {
+    Player.animate()
+    const tween = new Animation.Tween([start.x, start.y], [end.x, end.y], 10, (val) => {
+        Player.position = new Vector(val[0], val[1])
+        Camera.playerPositionChanged(Player.position)
+    })
+    tween.play().then(() => {
+        Player.stopAnimating()
+    })
+
     Effects.dashSound.play()
 }
 
@@ -31,6 +44,7 @@ Effects.nextLevel = function() {
 
     Effects.nextLevelSound.play()
 
+    // stop looping for 3 seconds
     setTimeout(() => {
         loop()
     }, 3000)

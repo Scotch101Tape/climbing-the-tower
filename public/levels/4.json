@@ -1,0 +1,23 @@
+{
+    "entities": [
+        {
+            "type": "spawn",
+            "position": [0, 0]
+        },
+        {
+            "type": "lava",
+            "position": [0, 1]
+        },
+        {
+            "type": "finish",
+            "position": [0, 2]
+        }
+    ],
+    "grid": {
+        "0": {
+            "0": true,
+            "1": true,
+            "2": true
+        }
+    }
+}

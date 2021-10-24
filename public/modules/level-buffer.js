@@ -3,12 +3,18 @@
 export let LevelBuffer = {
     current: 0,
     buffered: 0,
+    MAX: 4,
     buffer: 3,
     levels: {}
 }
 
 // Get a level from the server
 LevelBuffer.getLevel = function(number) {
+    // Dont grab a level above the max
+    if (number > LevelBuffer.MAX) {
+        return
+    }
+
     if (LevelBuffer.levels[number] != undefined) {
         // The level is already fetched, return it
         return LevelBuffer.LevelBuffer[number]
@@ -19,21 +25,6 @@ LevelBuffer.getLevel = function(number) {
             .then(response => response.json())
             .then(data => res(data))
         })
-        
-        /*(new Promise((res, rej) => {
-            const Http = new XMLHttpRequest()
-            const url=`https://cors-anywhere.herokuapp.com/https://climbing-the-tower-local.scotch101tape.repl.co/levels/${number}.json`
-            Http.open("GET", url)
-            Http.addEventListener("load", function() {
-                if (this.status == 200) {
-                    res(JSON.parse(this.responseText))
-                } else {
-                    rej("Level json file does not exist")
-                }
-            })
-
-            Http.send()
-        }))*/
     }
 }
 
@@ -44,7 +35,10 @@ LevelBuffer.nextLevel = function() {
 
     // Update the buffer
     LevelBuffer.current += 1
-    for (LevelBuffer.buffered++; LevelBuffer.buffered <= LevelBuffer.current + LevelBuffer.buffer; LevelBuffer.buffered++) {
+    if (LevelBuffer.current > LevelBuffer.MAX) {
+        return undefined
+    }
+    for (LevelBuffer.buffered++; LevelBuffer.buffered <= Math.min(LevelBuffer.current + LevelBuffer.buffer, LevelBuffer.MAX); LevelBuffer.buffered++) {
         LevelBuffer.levels[LevelBuffer.buffered] = LevelBuffer.getLevel(LevelBuffer.buffered)
     }
 

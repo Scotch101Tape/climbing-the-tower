@@ -7,6 +7,7 @@ import {Effects} from "./effects.js"
 export let Player = {
     initalized: false,
     dashCooldown: 0,
+    animating: false, //when animating the player cannot be moved or killed
     SIZE: 0.5,
     SPEED: 0.1,
     DASH_DISTANCE: 2,
@@ -19,6 +20,7 @@ export let Player = {
 Player.init = function(position) {
     Player.position = position
     Player.initalized = true
+    Player.animating = false
 
     Camera.init(Player.position)
 }
@@ -34,6 +36,8 @@ Player.step = function(dt) {
 }
 
 Player.move = function() {
+    if (Player.animating) {return}
+
     // Move toward the mouse if the w key is down
     if (keyIsDown(Player.CONTROLS.MOVE)) {        
         const mousePosition = Camera.pixelToPosition(new Vector(mouseX, mouseY))
@@ -48,11 +52,11 @@ Player.move = function() {
         const mousePosition = Camera.pixelToPosition(new Vector(mouseX, mouseY))
         const direction = Vector.subtract(mousePosition, Player.position)
 
-        Player.position = Vector.add(direction.unit().scale(Player.DASH_DISTANCE), Player.position)
+        const end = Vector.add(direction.unit().scale(Player.DASH_DISTANCE), Player.position)
 
         Player.dashCooldown = 1000
 
-        Effects.dash()
+        Effects.dash(Player.position, end)
     } else {
         return
     }
@@ -60,8 +64,18 @@ Player.move = function() {
     Camera.playerPositionChanged(Player.position)
 }
 
+Player.animate = function() {
+    Player.animating = true
+}
+
+Player.stopAnimating = function() {
+    Player.animating = false
+}
+
 // return true if the player is inside the specified rectange
 Player.isOnRectangle = function(x, y, w, h) {
+    if (Player.animating) {return false}
+
     // check that the circle center is not in the rectange
     const px = Player.position.x
     const py = Player.position.y
