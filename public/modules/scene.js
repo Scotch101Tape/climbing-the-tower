@@ -81,12 +81,6 @@ Scene.Scenes.Game.draw = function() {
     // Apply background
     background(0, 0, 0)
 
-    // Directions
-    fill(255, 255, 255)
-    textSize(20)
-    textAlign(LEFT)
-    text("Press W to move toward the mouse\nPress SHIFT to dash\nSCROLL to zoom\nGet to the green\nTry not to die", 10, 20)
-
     // Apply the camera
     if (Camera.initalized) {
         Camera.applyMatrix()
@@ -125,6 +119,12 @@ Scene.Scenes.Game.draw = function() {
 
     // Do animation housekeeping
     Animation.step()
+
+    // Directions
+    fill(255, 255, 255)
+    textSize(20)
+    textAlign(LEFT)
+    text("Press W to move toward the mouse\nPress SHIFT to dash\nSCROLL to zoom\nGet to the green\nTry not to die", 10, 20)
 }
 
 Scene.Scenes.Game.setup = function() {
