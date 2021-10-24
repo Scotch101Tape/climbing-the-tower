@@ -82,6 +82,7 @@ Scene.Scenes.Game.draw = function() {
     background(0, 0, 0)
 
     // Apply the camera
+    push()
     if (Camera.initalized) {
         Camera.applyMatrix()
     }
@@ -119,6 +120,7 @@ Scene.Scenes.Game.draw = function() {
 
     // Do animation housekeeping
     Animation.step()
+    pop()
 
     // Directions
     fill(255, 255, 255)
