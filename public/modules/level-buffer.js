@@ -21,7 +21,7 @@ LevelBuffer.getLevel = function(number) {
     } else {
         // Return a promise that get the level from the server
         return new Promise((res, rej) => {
-            fetch(`https://climbing-the-tower-local.scotch101tape.repl.co/levels/${number}.json`)
+            fetch(`${window.location.href}/levels/${number}.json`)
             .then(response => response.json())
             .then(data => res(data))
         })
