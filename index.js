@@ -8,3 +8,4 @@ app.use(cors())
 app.use(express.static(config.STATIC_FOLDER))
 
 app.listen(config.PORT)
+console.log(`Listening on port ${config.PORT}`)
