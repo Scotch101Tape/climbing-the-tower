@@ -1,3 +1,7 @@
 # For replit
 .replit
 .breakpoints
+
+# Npm
+node_modules
+package-lock.json
